@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ProjectDetail } from "@/components/project-detail";
 import { projects } from "@/lib/content";
+import { SITE_LOCALE, SITE_NAME } from "@/lib/site";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -16,9 +17,28 @@ export async function generateMetadata({ params }: PageProps<"/projets/[slug]">)
     return {};
   }
 
+  const title = project.name;
+  const description = project.tagline.fr;
+  const url = `/projets/${project.slug}`;
+
   return {
-    title: project.name,
-    description: project.tagline.fr,
+    title,
+    description,
+    keywords: [...project.tags, ...project.stack],
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: SITE_NAME,
+      title,
+      description,
+      url,
+      locale: SITE_LOCALE,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

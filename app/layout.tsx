@@ -4,8 +4,9 @@ import Script from "next/script";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { profile } from "@/lib/content";
+import { profile, skillGroups } from "@/lib/content";
 import { LanguageProvider } from "@/lib/language-context";
+import { SITE_LOCALE, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ThemeProvider } from "@/lib/theme-context";
 import "./globals.css";
 
@@ -20,9 +21,43 @@ const outfit = Outfit({
   display: "swap",
 });
 
+const title = `${profile.name} — ${profile.role.fr}`;
+
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role.fr}`,
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: title,
+    template: `%s · ${profile.name}`,
+  },
   description: profile.bio.fr,
+  keywords: skillGroups.flatMap((group) => group.items),
+  authors: [{ name: profile.name, url: SITE_URL }],
+  creator: profile.name,
+
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title,
+    description: profile.bio.fr,
+    url: SITE_URL,
+    locale: SITE_LOCALE,
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: profile.bio.fr,
+  },
+
+  alternates: {
+    canonical: "/",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 };
 
 export const viewport: Viewport = {
@@ -31,6 +66,27 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#121212" },
   ],
   colorScheme: "light dark",
+};
+
+/* Décrit Roland comme personne pour les moteurs de recherche et les
+   assistants IA qui lisent les données structurées (JSON-LD) plutôt que le
+   HTML seul — plus fiable qu'un simple <title> pour répondre à « qui est
+   Roland Djenwa ». */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.role.fr,
+  description: profile.bio.fr,
+  url: SITE_URL,
+  email: `mailto:${profile.email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Douala",
+    addressCountry: "CM",
+  },
+  sameAs: [profile.linkedin],
+  knowsAbout: skillGroups.flatMap((group) => group.items),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -45,6 +101,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <SiteFooter />
           </LanguageProvider>
         </ThemeProvider>
+
+        <script
+          type="application/ld+json"
+          // Contenu figé, écrit ici même : aucune donnée extérieure n'entre
+          // dans cette chaîne, donc rien à assainir.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   );

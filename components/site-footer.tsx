@@ -24,6 +24,9 @@ export function SiteFooter() {
           <a href="/" className="hover:text-foreground">
             {t({ fr: "Retour en haut", en: "Back to top" })}
           </a>
+          <a href="/llms.txt" className="hover:text-foreground">
+            llms.txt
+          </a>
         </div>
       </Container>
     </footer>
