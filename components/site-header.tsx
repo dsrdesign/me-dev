@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
@@ -16,17 +17,34 @@ const NAV_ITEMS: { id: string; label: LocalizedString }[] = [
   { id: "contact", label: { fr: "Contact", en: "Contact" } },
 ];
 
+function MenuIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
 export function SiteHeader() {
   const { locale, setLocale, t } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between gap-6">
+      <Container className="flex h-16 items-center justify-between gap-4">
         <Link href="/" className="shrink-0 text-sm font-semibold tracking-tight text-foreground">
           {profile.name}
         </Link>
 
-        <nav className="flex min-w-0 items-center gap-5 overflow-x-auto whitespace-nowrap">
+        <nav className="hidden items-center gap-5 md:flex">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.id}
@@ -55,8 +73,36 @@ export function SiteHeader() {
             ))}
           </div>
           <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? t({ fr: "Fermer le menu", en: "Close menu" }) : t({ fr: "Ouvrir le menu", en: "Open menu" })}
+            aria-expanded={menuOpen}
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition-colors hover:text-foreground md:hidden"
+          >
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
         </div>
       </Container>
+
+      {menuOpen ? (
+        <div className="border-t border-border bg-background md:hidden">
+          <Container>
+            <nav className="flex flex-col py-2">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/#${item.id}`}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-[var(--radius-sm)] px-2 py-2.5 text-sm text-foreground-muted transition-colors hover:bg-surface-secondary hover:text-foreground"
+                >
+                  {t(item.label)}
+                </Link>
+              ))}
+            </nav>
+          </Container>
+        </div>
+      ) : null}
     </header>
   );
 }
