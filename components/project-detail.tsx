@@ -55,9 +55,13 @@ export function ProjectDetail({ project }: { project: Project }) {
           </div>
         ) : null}
 
-        <p className="mt-10 max-w-2xl text-base leading-relaxed text-foreground-muted">
-          {t(project.description)}
-        </p>
+        <div className="mt-10 max-w-2xl space-y-5 text-base leading-relaxed text-foreground-muted">
+          {t(project.description)
+            .split("\n\n")
+            .map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+        </div>
 
         {project.insight ? (
           <div className="mt-8 max-w-2xl border-l-2 border-primary-500 py-1 pl-5">
