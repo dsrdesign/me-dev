@@ -254,6 +254,24 @@ export const projects: Project[] = [
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://getdoro.vercel.app/" }],
   },
   {
+    slug: "mimo",
+    name: "Mimo",
+    category: { fr: "Cadeau · Expérience interactive", en: "Gifting · Interactive Experience" },
+    status: { fr: "En cours", en: "In progress" },
+    period: "2026 – Present",
+    tagline: {
+      fr: "Un cadeau qui se découvre : offrir une expérience interactive faite de messages, de photos, de vidéos et de récompenses débloquées étape par étape.",
+      en: "A gift that unfolds: giving an interactive experience made of messages, photos, videos and rewards unlocked step by step.",
+    },
+    description: {
+      fr: "Projet personnel en cours de développement. Avec Mimo, on n'envoie pas un simple virement : on compose un parcours à offrir. Le créateur choisit le destinataire, écrit un message, enchaîne quelques étapes (texte, photo, vidéo, révélation) et répartit une somme d'argent en récompenses, immédiates, progressives ou finales, puis envoie le cadeau tout de suite ou à une date programmée. Le destinataire n'a ni application à installer ni compte à créer : il reçoit un lien, par exemple sur WhatsApp, confirme son numéro avec un code, et découvre son cadeau étape après étape. L'argent est une récompense dans le parcours, pas le cœur du produit : l'objectif est de donner l'impression de recevoir une surprise, pas d'utiliser un outil financier. Pensé d'abord pour le Cameroun.",
+      en: "A personal project currently in development. With Mimo, you don't just send a transfer: you compose a journey to give. The creator picks the recipient, writes a message, chains a few steps (text, photo, video, reveal) and splits a sum of money into rewards — immediate, progressive or final — then sends the gift right away or at a scheduled date. The recipient needs no app and no account: they receive a link, for instance on WhatsApp, confirm their number with a code, and uncover their gift step by step. Money is a reward within the journey, not the heart of the product: the goal is to feel like receiving a surprise, not like using a financial tool. Designed for Cameroon first.",
+    },
+    role: { fr: "Créateur & Développeur — projet personnel", en: "Creator & Developer — personal project" },
+    tags: ["Side Project", "Gifting", "Mobile Money"],
+    stack: [],
+  },
+  {
     slug: "book-and-go",
     name: "Book and Go",
     category: { fr: "Mobilité · Covoiturage", en: "Mobility · Carpooling" },
