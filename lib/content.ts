@@ -193,8 +193,8 @@ export const projects: Project[] = [
     status: { fr: "En ligne", en: "Live" },
     period: "2025 – Present",
     tagline: {
-      fr: "Plateforme SaaS de gestion commerciale et d'analyse des ventes pour les TPE/PME, avec un assistant IA intégré.",
-      en: "A SaaS platform for business management and sales analytics for small and mid-sized businesses, with a built-in AI assistant.",
+      fr: "La gestion commerciale des TPE/PME dans la poche : facturer, suivre ses impayés et interroger ses ventes avec un assistant IA, même sans connexion.",
+      en: "Business management for small businesses in your pocket: invoice, track unpaid bills and question your sales with an AI assistant, even offline.",
     },
     description: {
       fr: "Bref Point est la solution de gestion commerciale des TPE/PME et des équipes de vente terrain : facturation, clients, produits, dépenses et pilotage, dans une application mobile pensée pour le contexte local. Un commerçant crée une facture en quelques secondes, avec la TVA calculée selon le pays, des paiements échelonnés et un PDF partageable par lien, sans que son client ait besoin de compte. Plusieurs boutiques, vendeurs et rôles cohabitent sous un même propriétaire, qui suit son chiffre d'affaires, ses impayés, ses dépenses et sa marge sur un tableau de bord. Un assistant IA répond en langage naturel aux questions sur les ventes réelles de l'entreprise, et l'offre évolue par abonnements (Free, Pro, Team, Business) réglables en Mobile Money.\n\nCôté architecture, l'application Expo / React Native parle à une API NestJS sur PostgreSQL, structurée en Clean Architecture et Architecture Hexagonale : un module par domaine (factures, boutiques, finances, droits et quotas, IA, campagnes, WhatsApp…). Le mobile fonctionne hors ligne : les créations et modifications sont mises en file, rejouées au retour du réseau, tandis qu'une synchronisation descendante réconcilie la base locale. L'authentification combine JWT et OTP par SMS, doublé d'un message WhatsApp. Chaque action soumise à un plan (facture, IA, SMS) passe par un module de droits qui gère les quotas. L'assistant IA fonctionne par appels d'outils : le modèle planifie des requêtes structurées, un générateur SQL sécurisé les exécute en lecture seule, puis le résultat lui revient pour formuler la réponse. Le paiement des abonnements passe par une passerelle Mobile Money abstraite, confirmée par webhook signé. Un back-office Next.js sert l'administration et les campagnes, et la livraison s'appuie sur Docker, la CI/CD et EAS.",
@@ -203,6 +203,30 @@ export const projects: Project[] = [
     role: { fr: "Créateur & Développeur — projet personnel", en: "Creator & Developer — personal project" },
     tags: ["Side Project", "SaaS", "Business Tools", "AI"],
     stack: ["React Native", "Expo", "React", "Next.js", "NestJS", "TypeScript", "PostgreSQL", "Firebase", "Docker", "Azure DevOps"],
+    // stats: [
+    //   { value: "4", label: { fr: "Forfaits d'abonnement", en: "Subscription plans" } },
+    //   { value: "2", label: { fr: "Canaux OTP (SMS + WhatsApp)", en: "OTP channels (SMS + WhatsApp)" } },
+    //   { value: "3", label: { fr: "Plateformes : iOS, Android, web", en: "Platforms: iOS, Android, web" } },
+    //   { value: "20", label: { fr: "Appels d'outils max par réponse IA", en: "Max tool calls per AI answer" } },
+    // ],
+    challenges: [
+      {
+        fr: "Un assistant IA qui interroge les vraies données de l'entreprise sans jamais écrire en base : plans de requêtes structurés, SQL généré et exécuté en lecture seule, garde-fou contre les boucles d'appels.",
+        en: "An AI assistant that queries the company's real data without ever writing to it: structured query plans, SQL generated and run read-only, and a guard against runaway tool-call loops.",
+      },
+      {
+        fr: "Un mobile utilisable hors ligne : mutations mises en file puis rejouées, base locale réconciliée par synchronisation descendante.",
+        en: "A mobile app that works offline: mutations queued then replayed, local database reconciled through a downstream sync.",
+      },
+      {
+        fr: "Des droits et quotas par forfait (factures, IA, SMS) appliqués de façon uniforme à chaque action, indépendamment de l'affichage commercial.",
+        en: "Per-plan entitlements and quotas (invoices, AI, SMS) enforced uniformly on every action, independently of the marketing display.",
+      },
+      {
+        fr: "Des paiements d'abonnement fiables : passerelle Mobile Money abstraite, webhook signé, et vérification du statut en filet de sécurité quand le callback tarde.",
+        en: "Reliable subscription payments: an abstracted Mobile Money gateway, a signed webhook, and a status check as a safety net when the callback is late.",
+      },
+    ],
     links: [
       { label: { fr: "Site", en: "Website" }, href: "https://brefpoint.app/" },
       {
@@ -222,8 +246,8 @@ export const projects: Project[] = [
     status: { fr: "En ligne", en: "Live" },
     period: "2025 – Present",
     tagline: {
-      fr: "Une application de livraison à Douala qui met en relation vendeurs et livreurs vérifiés pour le dernier kilomètre du e-commerce social.",
-      en: "A delivery app in Douala connecting sellers with verified drivers for the last mile of social commerce.",
+      fr: "Le dernier kilomètre du e-commerce social à Douala : des livreurs vérifiés, un colis suivi en direct et un paiement protégé jusqu'à la remise.",
+      en: "The last mile of social commerce in Douala: verified drivers, a live-tracked parcel and a payment protected until handover.",
     },
     description: {
       fr: "Koli est une application de livraison à Douala pour les vendeurs qui travaillent sur WhatsApp, Instagram, TikTok ou Facebook et ont besoin de livreurs fiables sans les recruter. Le vendeur décrit son colis, fixe son prix à partir d'une fourchette suggérée selon la distance, et la demande est proposée aux livreurs vérifiés autour du point de collecte : le premier qui accepte prend la course. Le colis se suit en temps réel sur la carte, et la remise est prouvée par un code à quatre chiffres envoyé par SMS au destinataire. Le paiement se fait en espèces à la remise ou en Mobile Money, avec des fonds bloqués jusqu'à la validation. Côté livreur, chacun choisit librement ses courses, consulte son portefeuille et retire ses gains via Orange Money ou MTN MoMo.\n\nLe cœur du système est une machine à états de livraison : création, recherche, assignation, collecte, transit, livraison, règlement, avec des règles d'annulation propres à chaque étape. La recherche procède par diffusion en trois vagues de 45 secondes, sur des rayons de 2, 4 puis 6 km, orchestrées par des tâches asynchrones sur file d'attente (BullMQ et Redis). En Mobile Money, le livreur assigné déclenche une fenêtre de trois minutes pour confirmer le dépôt, faute de quoi la course repart en recherche. Les fonds sont alors bloqués, crédités au portefeuille du livreur à la validation du code, puis retenus une heure pour couvrir les litiges. Le suivi de position passe par WebSocket (Socket.IO) entre l'application Expo / React Native et l'API NestJS sur PostgreSQL. Les notifications combinent push Firebase, SMS et WhatsApp, et un module de portefeuille tient les soldes disponibles et en retenue.",
@@ -232,6 +256,30 @@ export const projects: Project[] = [
     role: { fr: "Créateur & Développeur — projet personnel", en: "Creator & Developer — personal project" },
     tags: ["Side Project", "Delivery", "Mobile Money"],
     stack: [],
+    // stats: [
+    //   { value: "135 s", label: { fr: "Recherche max en trois vagues", en: "Max search time over three waves" } },
+    //   { value: "2 → 6 km", label: { fr: "Rayon de diffusion", en: "Broadcast radius" } },
+    //   { value: "3 min", label: { fr: "Pour confirmer le dépôt", en: "To confirm the deposit" } },
+    //   { value: "1 h", label: { fr: "Retenue avant retrait", en: "Hold before withdrawal" } },
+    // ],
+    challenges: [
+      {
+        fr: "Une machine à états de livraison fiable, avec une autorité d'annulation différente selon l'étape : libre avant l'engagement, arbitrée par un admin une fois le colis récupéré.",
+        en: "A reliable delivery state machine, with different cancellation authority per stage: free before commitment, arbitrated by an admin once the parcel is picked up.",
+      },
+      {
+        fr: "Une diffusion par vagues de rayon croissant avec des fenêtres chronométrées, sans doublon d'acceptation quand plusieurs livreurs répondent en même temps.",
+        en: "Broadcasting in waves of growing radius with timed windows, without double acceptance when several drivers answer at once.",
+      },
+      {
+        fr: "Un séquestre Mobile Money : fonds bloqués à l'acceptation, libération automatique de la course si le dépôt n'arrive pas, crédit au portefeuille à la validation du code puis retenue pour les litiges.",
+        en: "A Mobile Money escrow: funds held at acceptance, automatic release of the job if the deposit doesn't arrive, wallet credit on code validation, then a hold for disputes.",
+      },
+      {
+        fr: "Un suivi GPS temps réel sur des réseaux mobiles instables, relayé par WebSocket.",
+        en: "Real-time GPS tracking over unstable mobile networks, relayed over WebSocket.",
+      },
+    ],
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://koli.brefpoint.app/" }],
   },
   {
@@ -241,8 +289,8 @@ export const projects: Project[] = [
     status: { fr: "En ligne", en: "Live" },
     period: "2025 – Present",
     tagline: {
-      fr: "Une application personnelle de discipline qui aide à transformer les intentions en actions constantes, via un cycle quotidien engagement → action → bilan.",
-      en: "A personal discipline app that turns intentions into consistent action through a daily commitment → action → review cycle.",
+      fr: "Moins de listes, plus de constance : un cycle quotidien engagement → action → bilan, sans points, badges ni séries.",
+      en: "Fewer lists, more consistency: a daily commitment → action → review cycle, with no points, badges or streaks.",
     },
     description: {
       fr: "Projet personnel né d'un constat simple : la plupart des gens ne manquent pas d'ambition, ils manquent de constance. Doro propose un cycle quotidien minimaliste — engagement le matin, bilan le soir — plutôt qu'une liste de tâches sans fin. Une IA discrète analyse les tendances pour aider l'utilisateur à mieux se comprendre, sans notation publique ni gamification artificielle : pas de points, de badges ou de séries. Conçu pour deux ouvertures par jour, pas pour capter l'attention en continu.",
@@ -251,6 +299,24 @@ export const projects: Project[] = [
     role: { fr: "Créateur & Développeur — projet personnel", en: "Creator & Developer — personal project" },
     tags: ["Side Project", "Productivity", "AI"],
     stack: [],
+    // stats: [
+    //   { value: "2", label: { fr: "Ouvertures par jour : matin et soir", en: "Opens a day: morning and evening" } },
+    //   { value: "0", label: { fr: "Points, badges ou séries", en: "Points, badges or streaks" } },
+    // ],
+    challenges: [
+      {
+        fr: "Concevoir pour deux ouvertures par jour plutôt que pour capter l'attention en continu : chaque écran doit être court et utile.",
+        en: "Designing for two opens a day rather than constant engagement: every screen must be short and useful.",
+      },
+      {
+        fr: "Garder l'IA discrète : elle analyse les tendances pour aider à se comprendre, sans noter ni comparer publiquement.",
+        en: "Keeping the AI discreet: it analyses patterns to help people understand themselves, without public scoring or comparison.",
+      },
+      {
+        fr: "Tenir la motivation sans gamification artificielle, en s'appuyant sur le bilan du soir plutôt que sur des récompenses.",
+        en: "Sustaining motivation without artificial gamification, relying on the evening review rather than rewards.",
+      },
+    ],
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://getdoro.vercel.app/" }],
   },
   {
@@ -260,8 +326,8 @@ export const projects: Project[] = [
     status: { fr: "En cours", en: "In progress" },
     period: "2026 – Present",
     tagline: {
-      fr: "Un cadeau qui se découvre : offrir une expérience interactive faite de messages, de photos, de vidéos et de récompenses débloquées étape par étape.",
-      en: "A gift that unfolds: giving an interactive experience made of messages, photos, videos and rewards unlocked step by step.",
+      fr: "Un cadeau qui se découvre : messages, photos, vidéos et récompenses débloquées étape par étape, sans compte ni application pour celui qui reçoit.",
+      en: "A gift that unfolds: messages, photos, videos and rewards unlocked step by step, with no account or app for the person receiving it.",
     },
     description: {
       fr: "Mimo permet d'offrir un cadeau sous forme d'expérience à découvrir. Le créateur choisit le destinataire, écrit un message d'ouverture, compose jusqu'à vingt étapes de textes, photos, vidéos et révélations, puis répartit une somme d'argent en récompenses, soit étape par étape, soit toutes d'un coup à la fin. Il envoie le cadeau tout de suite ou à une date programmée, par exemple pour un anniversaire à l'aube. Le destinataire n'installe rien et ne crée aucun compte : il reçoit un lien, par exemple sur WhatsApp, confirme son numéro avec un code SMS, puis avance dans l'ordre, chaque étape ouvrant la suivante et débloquant sa récompense. L'argent est une récompense dans le parcours, pas le cœur du produit : l'objectif est de donner l'impression de recevoir une surprise, pas d'utiliser un outil financier. Le produit vise le Cameroun d'abord.\n\nL'API NestJS suit une architecture hexagonale : un contexte par domaine (cadeau, parcours, récompenses, paiement, grand livre, messagerie, médias, accès destinataire), un domaine qui ignore le framework, et des ports explicites pour chaque service externe. Le flux commence par le paiement du créateur en Mobile Money. Le partenaire de paiement conserve les fonds, Mimo ne tenant aucun portefeuille. À la confirmation, l'API relit le statut chez le partenaire plutôt que de croire le callback, écrit une entrée de financement dans un grand livre immuable et idempotent, et fait passer le cadeau en attente d'envoi. Une tâche planifiée chaque minute envoie les liens dus et retente les échecs. Côté destinataire, une session limitée à un seul cadeau suit la vérification du code, la limite de codes protège le crédit SMS, et le serveur ne livre jamais les étapes à venir. Terminer une étape écrit d'abord le déblocage dans le grand livre, puis fait avancer la progression, sans jamais perdre ni doubler une récompense. L'application mobile du créateur est en Expo, la page du destinataire en Next.js.",
@@ -270,6 +336,30 @@ export const projects: Project[] = [
     role: { fr: "Créateur & Développeur — projet personnel", en: "Creator & Developer — personal project" },
     tags: ["Side Project", "Gifting", "Mobile Money"],
     stack: [],
+    // stats: [
+    //   { value: "20", label: { fr: "Étapes max par cadeau", en: "Max steps per gift" } },
+    //   { value: "2", label: { fr: "Modes de récompense", en: "Reward modes" } },
+    //   { value: "0", label: { fr: "Compte requis pour le destinataire", en: "Accounts required for the recipient" } },
+    //   { value: "12 h", label: { fr: "Durée de session du destinataire", en: "Recipient session length" } },
+    // ],
+    challenges: [
+      {
+        fr: "Ne jamais perdre ni doubler une récompense : déblocage écrit dans un grand livre idempotent avant l'avancement, et étape terminée une seule fois même en cas de requêtes simultanées.",
+        en: "Never losing or doubling a reward: the unlock is written to an idempotent ledger before progress advances, and a step is completed only once even with simultaneous requests.",
+      },
+      {
+        fr: "Un accès sans compte mais sécurisé : lien, numéro associé et code SMS, session limitée à un seul cadeau, limites de codes pour protéger le crédit SMS.",
+        en: "Account-free yet secure access: link, associated number and SMS code, a session limited to a single gift, and code limits to protect SMS credit.",
+      },
+      {
+        fr: "Garder la surprise côté serveur : les étapes à venir et les montants futurs ne quittent jamais l'API tant qu'ils ne sont pas débloqués.",
+        en: "Keeping the surprise server-side: upcoming steps and future amounts never leave the API until they are unlocked.",
+      },
+      {
+        fr: "Un paiement confirmé sans croire le callback : relecture du statut chez le partenaire, rejouable sans doublon, et envoi programmé repris automatiquement en cas d'échec.",
+        en: "A payment confirmed without trusting the callback: status re-read from the partner, replayable without duplicates, and scheduled dispatch automatically retried on failure.",
+      },
+    ],
   },
   {
     slug: "book-and-go",
@@ -278,8 +368,8 @@ export const projects: Project[] = [
     status: { fr: "En ligne", en: "Live" },
     period: "2024 – Present",
     tagline: {
-      fr: "Plateforme mobile de covoiturage mettant en relation conducteurs et passagers.",
-      en: "A mobile carpooling platform connecting drivers and passengers.",
+      fr: "Le covoiturage qui met en relation conducteurs vérifiés et passagers : trajet publié, place réservée et payée, échanges et rappels dans l'application.",
+      en: "Carpooling connecting verified drivers and passengers: trip published, seat booked and paid, chat and reminders inside the app.",
     },
     description: {
       fr: "Book and Go est une plateforme de covoiturage qui met en relation conducteurs et passagers. Un conducteur publie un trajet avec ses places disponibles, un passager le trouve par recherche et carte interactive, réserve et règle sa place, puis échange avec le conducteur dans l'application. La confiance repose sur la vérification des conducteurs : permis, pièce d'identité, carte grise et assurance sont examinés par l'équipe avant qu'un compte puisse publier. Des notifications push prévenent des confirmations, des rappels de départ et des messages, avec des liens profonds vers le bon écran. J'ai contribué aux fonctionnalités de publication et de recherche de trajets, à la réservation, aux profils et aux notifications, au sein de l'équipe AD2S.\n\nLe backend NestJS adopte l'Architecture Hexagonale et le Domain-Driven Design, avec un principe fort : aucun import direct entre modules fonctionnels (authentification, utilisateurs, trajets, réservations, paiements, documents, notifications, conversations). Tout passe par des événements, ce qui permet à chaque module d'évoluer, voire de se déployer, séparément. Le flux de réservation en est l'illustration : le montant est calculé et un identifiant de réservation généré, puis une demande de paiement est émise. La réservation n'est créée qu'une fois l'initiation réussie, et les places ne sont réservées qu'à la confirmation du paiement, pour qu'une disponibilité reste exacte. Une annulation ne les libère que si elles avaient été réservées. L'authentification associe JWT court, jeton de rafraîchissement révocable et OTP, et les notifications basculent de la push au SMS puis à l'email. Les tâches de fond passent par Bull et Redis, et le client mobile Expo / React Native vit dans un monorepo Nx avec l'espace d'administration.",
@@ -288,6 +378,30 @@ export const projects: Project[] = [
     role: { fr: "Développeur Logiciel — AD2S", en: "Software Developer — AD2S" },
     tags: ["Mobility", "Carpooling"],
     stack: ["React Native", "Expo", "NestJS", "TypeScript", "Firebase Cloud Messaging", "Google Maps API", "PostgreSQL", "Azure DevOps"],
+    // stats: [
+    //   { value: "4", label: { fr: "Documents conducteur vérifiés", en: "Driver documents verified" } },
+    //   { value: "3", label: { fr: "Canaux de notification", en: "Notification channels" } },
+    //   { value: "8+", label: { fr: "Modules découplés par événements", en: "Modules decoupled by events" } },
+    //   { value: "2", label: { fr: "Applications : client et admin", en: "Apps: client and admin" } },
+    // ],
+    challenges: [
+      {
+        fr: "Des places toujours exactes : réservées seulement à la confirmation du paiement, libérées à l'annulation uniquement si elles l'avaient été.",
+        en: "Always-accurate seat availability: reserved only when payment is confirmed, released on cancellation only if they had been reserved.",
+      },
+      {
+        fr: "Une réservation jamais créée si l'initiation du paiement échoue, via un identifiant généré en amont et une communication par événements.",
+        en: "A booking never created if payment initiation fails, using an ID generated upfront and event-based communication.",
+      },
+      {
+        fr: "Des modules sans aucun import direct entre eux, pour pouvoir les faire évoluer et les déployer séparément.",
+        en: "Modules with no direct imports between them, so each can evolve and deploy separately.",
+      },
+      {
+        fr: "Une vérification des conducteurs par documents puis OTP, et des notifications qui basculent de la push au SMS puis à l'email avec liens profonds vers le bon écran.",
+        en: "Driver verification through documents then OTP, and notifications that fall back from push to SMS to email with deep links to the right screen.",
+      },
+    ],
     links: [
       { label: { fr: "Site", en: "Website" }, href: "https://bookandgo.africa/" },
       {
@@ -307,8 +421,8 @@ export const projects: Project[] = [
     status: { fr: "En ligne", en: "Live" },
     period: "2024 – Present",
     tagline: {
-      fr: "Une plateforme de gestion hôtelière pensée pour l'Afrique, qui centralise réservations, chambres, clients et finances — même sans connexion internet.",
-      en: "A hotel management platform built for Africa, centralizing reservations, rooms, clients and finances — even without an internet connection.",
+      fr: "La gestion hôtelière pensée pour l'Afrique : réservations, chambres, facturation et ménage au même endroit, même quand le réseau tombe.",
+      en: "Hotel management built for Africa: reservations, rooms, invoicing and housekeeping in one place, even when the network drops.",
     },
     description: {
       fr: "GuestiLog est une plateforme de gestion hôtelière pensée pour l'Afrique, où le réseau n'est pas toujours fiable. Elle réunit au même endroit les réservations, les chambres, les clients (dont les VIP), le check-in et le check-out, la facturation en PDF, le suivi du ménage par chambre et les indicateurs du jour, comme le taux d'occupation et les revenus. Elle reste utilisable sans connexion : une réception peut continuer à travailler, puis tout se synchronise au retour du réseau. L'application s'installe comme une application sur mobile, tablette et ordinateur. Elle se vend en trois forfaits (Starter, Pro, Premium) selon la taille de l'établissement, avec un essai gratuit, et la gestion multi-établissements est prévue sur les offres supérieures.\n\nLe frontend est une PWA React (Vite, TanStack Router et Query) en cinq couches : coque installable précachée par un service worker, cache réseau des lectures, persistance du cache dans IndexedDB, file d'écritures hors ligne, et session dégradée. Les actions éligibles sont mises en file, affichées de façon optimiste, marquées « à synchroniser », puis rejouées au retour du réseau. Rejouer ne doit jamais créer de doublon, d'où une clé d'idempotence côté API. Le jeton d'accès ne vit qu'en mémoire et rien de secret n'est persisté. L'API NestJS sur PostgreSQL est conçue pour servir plusieurs hôtels sur une même instance, chacun sur son sous-domaine, avec une colonne de tenant, un contexte propagé automatiquement et la sécurité au niveau des lignes en filet de sécurité. Le statut d'une chambre est séparé en axes indépendants : l'occupation se déduit des réservations, la propreté du ménage. Les forfaits désactivent sans jamais supprimer, l'abonnement se règle en Mobile Money par callback, et les écritures comptables sont synchronisées vers Dolibarr avec reprises programmées.",
@@ -317,6 +431,34 @@ export const projects: Project[] = [
     role: { fr: "Développeur Logiciel — AD2S", en: "Software Developer — AD2S" },
     tags: ["SaaS", "Hospitality", "Offline-First"],
     stack: [],
+    // stats: [
+    //   { value: "3", label: { fr: "Forfaits : Starter, Pro, Premium", en: "Plans: Starter, Pro, Premium" } },
+    //   { value: "5", label: { fr: "Couches du mode hors ligne", en: "Offline-mode layers" } },
+    //   { value: "2", label: { fr: "Mois offerts en paiement annuel", en: "Months free on annual billing" } },
+    //   { value: "3", label: { fr: "Axes distincts du statut d'une chambre", en: "Separate axes of room status" } },
+    // ],
+    challenges: [
+      {
+        fr: "Travailler sans connexion sans créer de doublons : écritures mises en file, affichées de façon optimiste, puis rejouées avec une clé d'idempotence côté API.",
+        en: "Working offline without creating duplicates: writes queued, shown optimistically, then replayed with an idempotency key on the API.",
+      },
+      {
+        fr: "Servir plusieurs hôtels sur une même instance sans jamais mélanger leurs données : colonne de tenant, contexte propagé automatiquement et sécurité au niveau des lignes en filet de sécurité.",
+        en: "Serving several hotels on one instance without ever mixing their data: a tenant column, automatically propagated context and row-level security as a safety net.",
+      },
+      {
+        fr: "Un statut de chambre qui ne mélange plus occupation, propreté et disponibilité : chaque axe a sa propre source de vérité.",
+        en: "A room status that no longer mixes occupancy, cleanliness and availability: each axis has its own source of truth.",
+      },
+      {
+        fr: "Des forfaits qui limitent sans détruire : un downgrade désactive de façon réversible, car réservations et factures doivent rester intactes.",
+        en: "Plans that limit without destroying: a downgrade deactivates reversibly, because reservations and invoices must stay intact.",
+      },
+      {
+        fr: "Ne rien persister de secret hors ligne : le jeton d'accès reste en mémoire et la session dégradée n'affiche que des données déjà obtenues.",
+        en: "Persisting no secrets offline: the access token stays in memory and the degraded session only shows data already fetched.",
+      },
+    ],
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://www.guestilog.com/" }],
   },
   {
