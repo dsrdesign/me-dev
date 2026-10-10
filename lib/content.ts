@@ -227,6 +227,10 @@ export const projects: Project[] = [
         en: "Reliable subscription payments: an abstracted Mobile Money gateway, a signed webhook, and a status check as a safety net when the callback is late.",
       },
     ],
+    insight: {
+      fr: "Pour un commerçant, un outil de gestion qui exige d'être en ligne ou d'apprendre un logiciel comptable ne sera pas utilisé : tout ici est pensé pour qu'une facture se crée en quelques secondes, au comptoir, avec ou sans réseau.",
+      en: "For a shopkeeper, a management tool that demands connectivity or an accounting course won't get used: everything here is built so an invoice takes seconds to create, at the counter, with or without network.",
+    },
     links: [
       { label: { fr: "Site", en: "Website" }, href: "https://brefpoint.app/" },
       {
@@ -280,6 +284,10 @@ export const projects: Project[] = [
         en: "Real-time GPS tracking over unstable mobile networks, relayed over WebSocket.",
       },
     ],
+    insight: {
+      fr: "Au lancement, peu de livreurs actifs signifie qu'une carte presque vide détruit la confiance : d'où une diffusion par vagues plutôt qu'un choix sur carte, et un argent bloqué tant que le colis n'est pas remis.",
+      en: "At launch, few active drivers means a nearly empty map destroys trust: hence broadcasting in waves instead of picking on a map, and money held until the parcel is handed over.",
+    },
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://koli.brefpoint.app/" }],
   },
   {
@@ -317,6 +325,10 @@ export const projects: Project[] = [
         en: "Sustaining motivation without artificial gamification, relying on the evening review rather than rewards.",
       },
     ],
+    insight: {
+      fr: "Une application de discipline qui cherche à capter l'attention contredit son propre but : Doro est conçue pour être ouverte deux fois par jour, puis refermée.",
+      en: "A discipline app that tries to capture your attention defeats its own purpose: Doro is designed to be opened twice a day, then closed.",
+    },
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://getdoro.vercel.app/" }],
   },
   {
@@ -360,6 +372,10 @@ export const projects: Project[] = [
         en: "A payment confirmed without trusting the callback: status re-read from the partner, replayable without duplicates, and scheduled dispatch automatically retried on failure.",
       },
     ],
+    insight: {
+      fr: "Un cadeau d'argent qui ressemble à un virement n'est plus une surprise : la contrainte qui définit Mimo est de garder l'émotion devant et l'argent en récompense, avec un serveur qui ne révèle jamais l'étape suivante à l'avance.",
+      en: "A cash gift that feels like a transfer is no longer a surprise: the constraint defining Mimo is keeping the emotion up front and the money as a reward, with a server that never reveals the next step in advance.",
+    },
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://mimo.rolanddjenwa.me" }],
   },
   {
@@ -403,6 +419,10 @@ export const projects: Project[] = [
         en: "Driver verification through documents then OTP, and notifications that fall back from push to SMS to email with deep links to the right screen.",
       },
     ],
+    insight: {
+      fr: "Dans le covoiturage, une place affichée comme libre alors qu'elle ne l'est plus détruit la confiance plus vite qu'un bug visuel : toute la chaîne réservation, paiement, places est donc pilotée par des événements plutôt que par des appels directs.",
+      en: "In carpooling, a seat shown as free when it isn't erodes trust faster than any visual bug: the whole booking, payment and seat chain is therefore driven by events rather than direct calls.",
+    },
     links: [
       { label: { fr: "Site", en: "Website" }, href: "https://bookandgo.africa/" },
       {
@@ -460,6 +480,10 @@ export const projects: Project[] = [
         en: "Persisting no secrets offline: the access token stays in memory and the degraded session only shows data already fetched.",
       },
     ],
+    insight: {
+      fr: "Un hôtel ne peut pas arrêter d'enregistrer des clients parce que le réseau est coupé : le hors-ligne est la condition d'usage du produit, pas une fonctionnalité de confort.",
+      en: "A hotel can't stop checking in guests because the network is down: offline isn't a convenience feature, it's the condition for the product to be usable at all.",
+    },
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://www.guestilog.com/" }],
   },
   {
@@ -739,6 +763,10 @@ export const projects: Project[] = [
         en: "Offline reading via download, for low-connectivity areas.",
       },
     ],
+    insight: {
+      fr: "Une bibliothèque numérique qui suppose une bonne connexion exclut précisément ceux qu'elle veut servir : le contenu doit se télécharger, se lire hors ligne et rester léger.",
+      en: "A digital library that assumes a good connection excludes exactly the people it means to serve: content must download, read offline and stay light.",
+    },
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://ntoh-library.web.app/" }],
   },
   {
