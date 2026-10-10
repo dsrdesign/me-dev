@@ -141,7 +141,7 @@ export const education: EducationEntry[] = [
     degree: { fr: "Licence Technologique — Génie Logiciel", en: "Technological Bachelor's — Software Engineering" },
     school: "Institut Universitaire de Technologie, Douala",
     detail: { fr: "Mention Excellente", en: "Highest Honors" },
-    period: "2021 – 2024",
+    period: "2023 – 2024",
   },
   {
     degree: { fr: "DUT — Génie Informatique", en: "University Diploma of Technology — Computer Engineering" },
