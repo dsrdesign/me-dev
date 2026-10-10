@@ -360,6 +360,7 @@ export const projects: Project[] = [
         en: "A payment confirmed without trusting the callback: status re-read from the partner, replayable without duplicates, and scheduled dispatch automatically retried on failure.",
       },
     ],
+    links: [{ label: { fr: "Site", en: "Website" }, href: "https://mimo.rolanddjenwa.me" }],
   },
   {
     slug: "book-and-go",
@@ -590,6 +591,7 @@ export const projects: Project[] = [
       en: "Offline-first isn't optional here: field agents collect in areas with no reliable connectivity, and an app that needs a signal to record a payment is an app that doesn't get used.",
     },
     links: [
+      { label: { fr: "Site", en: "Website" }, href: "https://kolagroup.io/fr/kola-collect" },
       {
         label: { fr: "Play Store", en: "Play Store" },
         href: "https://play.google.com/store/apps/details?id=com.microfinancecollector&hl=fr",
@@ -636,6 +638,7 @@ export const projects: Project[] = [
       en: "Built around the cashier as the unit of accountability rather than the transaction: agents lose money to reconciliation gaps between staff, not to individually mistyped transfers.",
     },
     links: [
+      { label: { fr: "Site", en: "Website" }, href: "https://kolagroup.io/fr/kola-till-manager" },
       {
         label: { fr: "Play Store", en: "Play Store" },
         href: "https://play.google.com/store/apps/details?id=com.kola.kolatillmanager&hl=fr",
