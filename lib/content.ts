@@ -387,6 +387,47 @@ export const projects: Project[] = [
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://miimo.gift" }],
   },
   {
+    slug: "tunnda",
+    name: "Tunnda",
+    category: { fr: "Généalogie · Collaboration familiale", en: "Genealogy · Family Collaboration" },
+    status: { fr: "En cours", en: "In progress" },
+    period: "2026 – Present",
+    tagline: {
+      fr: "L'arbre généalogique privé et collaboratif des familles africaines, du village à la diaspora : polygamie, noms traditionnels et vie privée des vivants compris.",
+      en: "The private, collaborative family tree for African families, from the village to the diaspora: polygamy, traditional names and the privacy of the living included.",
+    },
+    description: {
+      fr: "Tunnda permet à une famille de construire son arbre généalogique à plusieurs, en privé. Chacun connaît un morceau de l'histoire : le propriétaire crée la famille, invite ses proches par un lien personnel ou un lien de groupe partagé sur WhatsApp, et chacun rejoint l'arbre avec son numéro de téléphone et un code, sans mot de passe. Les rôles décident qui consulte, qui complète et qui administre. Le modèle suit la réalité des familles africaines plutôt qu'un schéma occidental : plusieurs unions à la fois, enfants rangés sous l'union dont ils sont issus, parents biologiques et adoptifs, noms traditionnels et surnoms, dates approximatives (« vers 1932 ») et liens incertains, qui ne sont jamais présentés comme confirmés. Une recherche insensible aux accents et aux apostrophes retrouve « M'Barga » quand on tape « mbarga », et les doublons sont repérés puis fusionnés.\n\nL'API NestJS suit une architecture hexagonale sur PostgreSQL, avec des migrations écrites à la main. Filiations et unions vivent dans deux tables distinctes plutôt qu'une relation générique, et la base garantit par des clés composites qu'un lien ne relie que deux personnes de la même famille. Chaque changement passe dans une transaction protégée par un verrou consultatif par famille, qui empêche les boucles d'ascendance et les doubles parents biologiques même sous requêtes concurrentes, et écrit son entrée dans un journal d'audit avec les valeurs avant et après. Un filtre de confidentialité masque dates, lieux, biographie et photo des personnes peut-être vivantes aux membres qui n'y ont pas droit. Les photos sont stockées en privé et servies par des adresses signées de courte durée. Le site Next.js garde la session dans un cookie httpOnly et passe par un proxy serveur vers l'API. L'arbre interactif repose sur un moteur de disposition pur et testé, qui place les épouses de part et d'autre, centre les parents au-dessus de leurs enfants et dessine en arc les unions qui en enjambent d'autres.",
+      en: "Tunnda lets a family build its family tree together, in private. Everyone knows a piece of the story: the owner creates the family, invites relatives through a personal link or a group link shared on WhatsApp, and each person joins the tree with their phone number and a code, with no password. Roles decide who views, who contributes and who administers. The model follows the reality of African families rather than a Western template: several unions at once, children placed under the union they come from, biological and adoptive parents, traditional names and nicknames, approximate dates (\"around 1932\") and uncertain links, which are never shown as confirmed. An accent- and apostrophe-insensitive search finds \"M'Barga\" when you type \"mbarga\", and duplicates are flagged then merged.\n\nThe NestJS API follows a hexagonal architecture on PostgreSQL, with hand-written migrations. Filiations and unions live in two separate tables rather than a generic relationship, and composite keys guarantee at the database level that a link only joins two people from the same family. Every change runs in a transaction guarded by a per-family advisory lock, which prevents ancestry loops and double biological parents even under concurrent requests, and writes an audit entry with before and after values. A privacy filter hides dates, places, biography and photo of possibly living people from members who aren't entitled to them. Photos are stored privately and served through short-lived signed URLs. The Next.js site keeps the session in an httpOnly cookie and goes through a server-side proxy to the API. The interactive tree relies on a pure, tested layout engine that places spouses on either side, centres parents above their children and draws as arcs the unions that span others.",
+    },
+    role: { fr: "Créateur & Développeur — projet personnel", en: "Creator & Developer — personal project" },
+    tags: ["Side Project", "Genealogy", "Privacy"],
+    stack: ["Next.js", "NestJS", "TypeScript", "PostgreSQL", "Docker"],
+    challenges: [
+      {
+        fr: "Modéliser des familles réelles : polygamie, enfants rattachés à leur union, parents biologiques et adoptifs, dates approximatives et liens incertains, sans jamais présenter une hypothèse comme un fait.",
+        en: "Modelling real families: polygamy, children attached to their union, biological and adoptive parents, approximate dates and uncertain links, without ever presenting a guess as a fact.",
+      },
+      {
+        fr: "Garder l'arbre cohérent quand plusieurs proches l'éditent en même temps : verrou consultatif par famille, refus des boucles d'ascendance et des doubles parents biologiques, fusion de doublons sans relation orpheline.",
+        en: "Keeping the tree consistent while several relatives edit it at once: a per-family advisory lock, rejection of ancestry loops and double biological parents, and duplicate merging without orphaned relationships.",
+      },
+      {
+        fr: "Protéger la vie privée des vivants : détails et photo masqués selon le rôle, photos privées servies par adresses signées, et un journal d'audit qui dit qui a changé quoi.",
+        en: "Protecting the privacy of the living: details and photo hidden by role, private photos served through signed URLs, and an audit log that tells who changed what.",
+      },
+      {
+        fr: "Dessiner lisiblement un arbre polygame sur un téléphone : moteur de disposition pur et testé, épouses de part et d'autre, unions qui s'enjambent tracées en arc, vue de toute la famille.",
+        en: "Drawing a polygamous tree legibly on a phone: a pure, tested layout engine, spouses on either side, overlapping unions drawn as arcs, and a whole-family view.",
+      },
+    ],
+    insight: {
+      fr: "Un logiciel de généalogie pensé pour un mariage unique et des dates exactes efface une partie de nos familles : Tunnda part de la polygamie, des noms traditionnels et de la mémoire orale, et traite l'incertitude comme une information.",
+      en: "Genealogy software built for a single marriage and exact dates erases part of our families: Tunnda starts from polygamy, traditional names and oral memory, and treats uncertainty as information.",
+    },
+    links: [{ label: { fr: "Site", en: "Website" }, href: "https://tunnda.vercel.app" }],
+  },
+  {
     slug: "book-and-go",
     name: "Book and Go",
     category: { fr: "Mobilité · Covoiturage", en: "Mobility · Carpooling" },
