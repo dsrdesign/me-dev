@@ -183,6 +183,9 @@ export type Project = {
   challenges?: LocalizedString[];
   /* Une contrainte qui définit le produit, en une phrase. */
   insight?: LocalizedString;
+  /* Ce que le produit permet de faire, en puces courtes. */
+  features?: LocalizedString[];
+  platform?: LocalizedString;
 };
 
 export const projects: Project[] = [
@@ -231,6 +234,15 @@ export const projects: Project[] = [
       fr: "Pour un commerçant, un outil de gestion qui exige d'être en ligne ou d'apprendre un logiciel comptable ne sera pas utilisé : tout ici est pensé pour qu'une facture se crée en quelques secondes, au comptoir, avec ou sans réseau.",
       en: "For a shopkeeper, a management tool that demands connectivity or an accounting course won't get used: everything here is built so an invoice takes seconds to create, at the counter, with or without network.",
     },
+    platform: { fr: "Mobile (iOS, Android) et web", en: "Mobile (iOS, Android) and web" },
+    features: [
+      { fr: "Facturation rapide avec TVA par pays et paiements échelonnés", en: "Fast invoicing with per-country VAT and instalment payments" },
+      { fr: "Facture PDF partageable par lien, sans compte pour le client", en: "PDF invoice shareable by link, no customer account needed" },
+      { fr: "Multi-boutiques, vendeurs et rôles sous un même propriétaire", en: "Multiple shops, sellers and roles under one owner" },
+      { fr: "Dépenses, marge et tableau de bord des ventes et des impayés", en: "Expenses, margin and a dashboard for sales and unpaid invoices" },
+      { fr: "Assistant IA qui répond sur les données réelles de l'entreprise", en: "AI assistant answering from the company's real data" },
+      { fr: "Mode hors ligne et abonnements payables en Mobile Money", en: "Offline mode and subscriptions payable via Mobile Money" },
+    ],
     links: [
       { label: { fr: "Site", en: "Website" }, href: "https://brefpoint.app/" },
       {
@@ -288,7 +300,26 @@ export const projects: Project[] = [
       fr: "Au lancement, peu de livreurs actifs signifie qu'une carte presque vide détruit la confiance : d'où une diffusion par vagues plutôt qu'un choix sur carte, et un argent bloqué tant que le colis n'est pas remis.",
       en: "At launch, few active drivers means a nearly empty map destroys trust: hence broadcasting in waves instead of picking on a map, and money held until the parcel is handed over.",
     },
-    links: [{ label: { fr: "Site", en: "Website" }, href: "https://koli.brefpoint.app/" }],
+    platform: { fr: "Mobile (iOS, Android)", en: "Mobile (iOS, Android)" },
+    features: [
+      { fr: "Prix fixé par le vendeur à partir d'une fourchette suggérée", en: "Price set by the seller from a suggested range" },
+      { fr: "Diffusion de la course aux livreurs vérifiés, par vagues de rayon croissant", en: "Job broadcast to verified drivers in waves of growing radius" },
+      { fr: "Suivi GPS du colis en temps réel", en: "Real-time GPS parcel tracking" },
+      { fr: "Code de remise à quatre chiffres envoyé par SMS", en: "Four-digit handover code sent by SMS" },
+      { fr: "Paiement en espèces ou Mobile Money avec fonds bloqués", en: "Cash or Mobile Money payment with held funds" },
+      { fr: "Portefeuille livreur et retraits Orange Money / MTN MoMo", en: "Driver wallet and Orange Money / MTN MoMo withdrawals" },
+    ],
+    links: [
+      { label: { fr: "Site", en: "Website" }, href: "https://koli.brefpoint.app/" },
+      {
+        label: { fr: "Play Store", en: "Play Store" },
+        href: "https://play.google.com/store/apps/details?id=com.brefpoint.koli",
+      },
+      {
+        label: { fr: "App Store", en: "App Store" },
+        href: "https://apps.apple.com/us/app/id6801882231",
+      },
+    ],
   },
   {
     slug: "doro",
@@ -329,14 +360,21 @@ export const projects: Project[] = [
       fr: "Une application de discipline qui cherche à capter l'attention contredit son propre but : Doro est conçue pour être ouverte deux fois par jour, puis refermée.",
       en: "A discipline app that tries to capture your attention defeats its own purpose: Doro is designed to be opened twice a day, then closed.",
     },
+    platform: { fr: "Mobile", en: "Mobile" },
+    features: [
+      { fr: "Engagement le matin, bilan le soir", en: "Morning commitment, evening review" },
+      { fr: "Une seule action à la fois plutôt qu'une liste sans fin", en: "One action at a time instead of an endless list" },
+      { fr: "IA discrète qui analyse les tendances de l'utilisateur", en: "Discreet AI analysing the user's patterns" },
+      { fr: "Aucun point, badge ni série", en: "No points, badges or streaks" },
+    ],
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://getdoro.vercel.app/" }],
   },
   {
     slug: "mimo",
     name: "Miimo",
     category: { fr: "Cadeau · Expérience interactive", en: "Gifting · Interactive Experience" },
-    status: { fr: "En cours", en: "In progress" },
-    period: "2026 – Present",
+    status: { fr: "En ligne", en: "Live" },
+    period: "2026",
     tagline: {
       fr: "Un cadeau qui se découvre : messages, photos et récompenses débloquées étape par étape, sans compte ni application pour celui qui reçoit.",
       en: "A gift that unfolds: messages, photos and rewards unlocked step by step, with no account or app for the person receiving it.",
@@ -384,6 +422,15 @@ export const projects: Project[] = [
       fr: "Un cadeau d'argent qui ressemble à un virement n'est plus une surprise : la contrainte qui définit Miimo est de garder l'émotion devant et l'argent en récompense, avec un serveur qui ne révèle jamais l'étape suivante à l'avance.",
       en: "A cash gift that feels like a transfer is no longer a surprise: the constraint defining Miimo is keeping the emotion up front and the money as a reward, with a server that never reveals the next step in advance.",
     },
+    platform: { fr: "Mobile (créateur) et web (destinataire)", en: "Mobile (creator) and web (recipient)" },
+    features: [
+      { fr: "Parcours de jusqu'à vingt étapes : texte, photo, vidéo, révélation", en: "Journey of up to twenty steps: text, photo, video, reveal" },
+      { fr: "Récompenses réparties étape par étape ou débloquées à la fin", en: "Rewards split step by step or unlocked at the end" },
+      { fr: "Envoi immédiat ou programmé à une date choisie", en: "Immediate or scheduled sending on a chosen date" },
+      { fr: "Destinataire sans compte : lien, numéro et code SMS", en: "Account-free recipient: link, number and SMS code" },
+      { fr: "Les étapes à venir restent cachées jusqu'à leur déblocage", en: "Upcoming steps stay hidden until unlocked" },
+      { fr: "Notifications au créateur à l'ouverture et à la fin du cadeau", en: "Creator notified when the gift is opened and completed" },
+    ],
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://miimo.gift" }],
   },
   {
@@ -472,6 +519,15 @@ export const projects: Project[] = [
       fr: "Dans le covoiturage, une place affichée comme libre alors qu'elle ne l'est plus détruit la confiance plus vite qu'un bug visuel : toute la chaîne réservation, paiement, places est donc pilotée par des événements plutôt que par des appels directs.",
       en: "In carpooling, a seat shown as free when it isn't erodes trust faster than any visual bug: the whole booking, payment and seat chain is therefore driven by events rather than direct calls.",
     },
+    platform: { fr: "Mobile (iOS, Android) et espace admin", en: "Mobile (iOS, Android) and admin space" },
+    features: [
+      { fr: "Publication de trajets avec places disponibles", en: "Trip publishing with available seats" },
+      { fr: "Recherche de trajets et carte interactive", en: "Trip search and interactive map" },
+      { fr: "Réservation et paiement de la place", en: "Seat booking and payment" },
+      { fr: "Vérification des conducteurs par documents", en: "Driver verification through documents" },
+      { fr: "Conversations entre conducteur et passagers", en: "Chat between driver and passengers" },
+      { fr: "Notifications push, SMS et email avec liens profonds", en: "Push, SMS and email notifications with deep links" },
+    ],
     links: [
       { label: { fr: "Site", en: "Website" }, href: "https://bookandgo.africa/" },
       {
@@ -533,6 +589,15 @@ export const projects: Project[] = [
       fr: "Un hôtel ne peut pas arrêter d'enregistrer des clients parce que le réseau est coupé : le hors-ligne est la condition d'usage du produit, pas une fonctionnalité de confort.",
       en: "A hotel can't stop checking in guests because the network is down: offline isn't a convenience feature, it's the condition for the product to be usable at all.",
     },
+    platform: { fr: "Web installable (PWA) : mobile, tablette, ordinateur", en: "Installable web (PWA): mobile, tablet, desktop" },
+    features: [
+      { fr: "Réservations, chambres et clients, dont les VIP", en: "Reservations, rooms and guests, including VIPs" },
+      { fr: "Check-in, check-out et facturation PDF automatique", en: "Check-in, check-out and automatic PDF invoicing" },
+      { fr: "Suivi du ménage par chambre", en: "Per-room housekeeping tracking" },
+      { fr: "Taux d'occupation et revenus en temps réel", en: "Real-time occupancy rate and revenue" },
+      { fr: "Fonctionne hors ligne, synchronise au retour du réseau", en: "Works offline, syncs when the network returns" },
+      { fr: "Trois forfaits et abonnement payable en Mobile Money", en: "Three plans and subscription payable via Mobile Money" },
+    ],
     links: [{ label: { fr: "Site", en: "Website" }, href: "https://www.guestilog.com/" }],
   },
   {
