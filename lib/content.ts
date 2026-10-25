@@ -186,11 +186,14 @@ export type Project = {
   /* Ce que le produit permet de faire, en puces courtes. */
   features?: LocalizedString[];
   platform?: LocalizedString;
+  /* Icône de l'app, dans public/projets/. Sans icône, l'initiale du nom est affichée. */
+  icon?: string;
 };
 
 export const projects: Project[] = [
   {
     slug: "bref-point",
+    icon: "/projets/bref-point.png",
     name: "Bref Point",
     category: { fr: "SaaS · Gestion commerciale", en: "SaaS · Business Tools" },
     status: { fr: "En ligne", en: "Live" },
@@ -257,6 +260,7 @@ export const projects: Project[] = [
   },
   {
     slug: "koli",
+    icon: "/projets/koli.png",
     name: "Koli",
     category: { fr: "Livraison · Dernier kilomètre", en: "Delivery · Last Mile" },
     status: { fr: "En ligne", en: "Live" },
@@ -371,6 +375,7 @@ export const projects: Project[] = [
   },
   {
     slug: "mimo",
+    icon: "/projets/mimo.png",
     name: "Miimo",
     category: { fr: "Cadeau · Expérience interactive", en: "Gifting · Interactive Experience" },
     status: { fr: "En ligne", en: "Live" },
@@ -476,6 +481,7 @@ export const projects: Project[] = [
   },
   {
     slug: "book-and-go",
+    icon: "/projets/book-and-go.png",
     name: "Book and Go",
     category: { fr: "Mobilité · Covoiturage", en: "Mobility · Carpooling" },
     status: { fr: "En ligne", en: "Live" },
@@ -542,6 +548,7 @@ export const projects: Project[] = [
   },
   {
     slug: "guestilog",
+    icon: "/projets/guestilog.png",
     name: "GuestiLog",
     category: { fr: "SaaS · Gestion hôtelière", en: "SaaS · Hotel Management" },
     status: { fr: "En ligne", en: "Live" },
@@ -742,6 +749,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kola-till-manager",
+    icon: "/projets/kola-till-manager.png",
     name: "Kola Till Manager",
     category: { fr: "Fintech · Mobile Money", en: "Fintech · Mobile Money" },
     status: { fr: "En ligne", en: "Live" },
@@ -785,6 +793,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tchopme",
+    icon: "/projets/tchopme.png",
     name: "TchopMe",
     category: { fr: "Livraison de repas", en: "Food Delivery" },
     status: { fr: "En ligne", en: "Live" },

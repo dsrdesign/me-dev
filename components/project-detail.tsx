@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Chip } from "@/components/ui/chip";
+import { ProjectIcon } from "@/components/ui/project-icon";
 import { LinkIcon } from "@/components/ui/link-icon";
 import type { Project } from "@/lib/content";
 import { useLanguage } from "@/lib/language-context";
@@ -47,9 +48,12 @@ export function ProjectDetail({ project }: { project: Project }) {
         </Link>
 
         <p className="mt-6 text-sm font-medium text-foreground-muted">{t(project.category)}</p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          {project.name}
-        </h1>
+        <div className="mt-3 flex items-center gap-4">
+          <ProjectIcon name={project.name} icon={project.icon} size={56} />
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            {project.name}
+          </h1>
+        </div>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground-muted">{t(project.tagline)}</p>
 
         {project.links && project.links.length > 0 ? (

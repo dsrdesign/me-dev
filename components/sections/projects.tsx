@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Chip } from "@/components/ui/chip";
+import { ProjectIcon } from "@/components/ui/project-icon";
 import { projects } from "@/lib/content";
 import { useLanguage } from "@/lib/language-context";
 
@@ -32,7 +33,10 @@ export function Projects() {
                 </span>
               </div>
 
-              <h3 className="mt-4 text-lg font-semibold text-foreground">{project.name}</h3>
+              <div className="mt-4 flex items-center gap-3">
+                <ProjectIcon name={project.name} icon={project.icon} />
+                <h3 className="text-lg font-semibold text-foreground">{project.name}</h3>
+              </div>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-foreground-muted">{t(project.tagline)}</p>
 
               <div className="mt-4 flex flex-wrap gap-2">
