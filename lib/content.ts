@@ -855,6 +855,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ntoh-library",
+    icon: "/projets/ntoh-library.png",
     name: "Ntoh Library",
     category: { fr: "EdTech", en: "EdTech" },
     status: { fr: "En ligne", en: "Live" },
@@ -896,6 +897,7 @@ export const projects: Project[] = [
   },
   {
     slug: "bewilla",
+    icon: "/projets/bewilla.png",
     name: "Bewilla.de",
     category: { fr: "Emploi · Immigration", en: "Employment · Immigration" },
     status: { fr: "En ligne", en: "Live" },

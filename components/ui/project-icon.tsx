@@ -20,7 +20,7 @@ export function ProjectIcon({
         width={size}
         height={size}
         style={style}
-        className="shrink-0 rounded-[22%] border border-border object-cover"
+        className="shrink-0 rounded-[22%] border border-border bg-white object-cover"
       />
     );
   }
