@@ -13,7 +13,7 @@ export function Hero() {
       <Container>
         <div className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-foreground-muted">
           <span className="h-1.5 w-1.5 rounded-full bg-primary-500" aria-hidden />
-          {t({ fr: "Disponible pour de nouvelles opportunités", en: "Open to new opportunities" })}
+          {t({ fr: "Disponible pour construire des solutions", en: "Available to build solutions" })}
         </div>
 
         <h1 className="mt-6 max-w-2xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
