@@ -327,6 +327,7 @@ export const projects: Project[] = [
   },
   {
     slug: "doro",
+    icon: "/projets/doro.svg",
     name: "Doro",
     category: { fr: "Application personnelle · Discipline", en: "Personal App · Discipline" },
     status: { fr: "En ligne", en: "Live" },
@@ -440,6 +441,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tunnda",
+    icon: "/projets/tunnda.png",
     name: "Tunnda",
     category: { fr: "Généalogie · Collaboration familiale", en: "Genealogy · Family Collaboration" },
     status: { fr: "En cours", en: "In progress" },
